@@ -4,6 +4,7 @@
 
   <Import Project="AssemblyCommonInfo.targets" />
   <Import Project="$(MSBuildProjectDirectory)\..\[Configuration]\Assembly\DotNet.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\..\[Configuration]\Assembly\StyleCop.targets" />
 
   <Target Name="AssemblyInfoOverride" BeforeTargets="Build">
     <Version VersionFile="$(MSBuildProjectDirectory)\..\[Configuration]\Assembly\Version.data" BuildType="Automatic" RevisionType="Increment">
