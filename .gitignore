@@ -59,3 +59,4 @@ Temporary Items
 *.generated.cs
 *.orig
 *.origin.cs
+[Configuration]/Assembly/Version.data

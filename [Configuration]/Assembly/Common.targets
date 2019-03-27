@@ -1,8 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildProjectDirectory)\..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets" /> <!-- set correct path -->
+
   <Import Project="AssemblyCommonInfo.targets" />
 
   <Target Name="AssemblyInfoOverride" BeforeTargets="Build">
-    <Message Text="Overriding AssemblyInfo for $(MSBuildProjectName)" Importance="High"></Message>
+    <Version VersionFile="$(MSBuildProjectDirectory)\..\[Configuration]\Assembly\Version.data" BuildType="Automatic" RevisionType="Increment">
+      <Output TaskParameter="Major" PropertyName="Major" />
+      <Output TaskParameter="Minor" PropertyName="Minor" />
+      <Output TaskParameter="Build" PropertyName="Build" />
+      <Output TaskParameter="Revision" PropertyName="Revision" />
+    </Version>
+
+    <Message Text="Overriding AssemblyInfo for $(MSBuildProjectName): $(Major).$(Minor).$(Build).$(Revision)" Importance="High"></Message>
+    
     <AssemblyInfo
       CodeLanguage="CS"
       OutputFile="Properties\AssemblyInfo.cs"
@@ -13,6 +24,8 @@
       AssemblyCopyright="$(Assembly_Copyright)"
       AssemblyTrademark="$(Assembly_Trademark)"
       ComVisible="false"
+      AssemblyVersion="$(Major).$(Minor).$(Build).$(Revision)"
+      AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)"
       >
     </AssemblyInfo>
 
