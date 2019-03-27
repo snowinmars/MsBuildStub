@@ -1,0 +1,21 @@
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="AssemblyCommonInfo.targets" />
+
+  <Target Name="AssemblyInfoOverride" BeforeTargets="Build">
+    <Message Text="Overriding AssemblyInfo for $(MSBuildProjectName)" Importance="High"></Message>
+    <AssemblyInfo
+      CodeLanguage="CS"
+      OutputFile="Properties\AssemblyInfo.cs"
+      AssemblyTitle="$(MSBuildProjectName)"
+      AssemblyDescription="$(Assembly_Description)"
+      AssemblyCompany="$(Assembly_Company)"
+      AssemblyProduct="$(Assembly_Product)"
+      AssemblyCopyright="$(Assembly_Copyright)"
+      AssemblyTrademark="$(Assembly_Trademark)"
+      ComVisible="false"
+      >
+    </AssemblyInfo>
+
+    <Message Text="AssemblyInfo data have been overridded for $(MSBuildProjectName)" Importance="High"></Message>
+  </Target>
+</Project>
