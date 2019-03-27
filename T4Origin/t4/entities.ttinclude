@@ -1,0 +1,56 @@
+﻿<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#+
+
+public class AssemblyDeclaration
+{
+    public AssemblyDeclaration(string id, string path, string projectName)
+    {
+        Id = id;
+        Path = path;
+        ProjectName = ProjectName;
+    }
+
+    public bool IsVirtual => string.IsNullOrWhiteSpace(Path);
+
+    public string Id { get; set; }
+
+    public string Path { get; set; }
+
+    public string ProjectName { get; set; }
+}
+
+public class EnumDeclaration
+{
+    public EnumDeclaration(string name, string enumValueType, string[] assemblies)
+    {
+        CsName = name;
+        CsValueType = enumValueType;
+        Assemblies = assemblies;
+        Properties = new List<EnumProperty>();
+    }
+
+    public string CsName { get; }
+
+    public string CsValueType { get; }
+
+    public List<EnumProperty> Properties { get; }
+
+    public string[] Assemblies { get; set; }
+}
+
+public class EnumProperty
+{
+    public EnumProperty(string name, int value)
+    {
+        CsName = name;
+        Value = value;
+    }
+
+    public string CsName { get; }
+
+    public int Value { get; }
+}
+
+#>

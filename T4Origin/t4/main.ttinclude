@@ -1,0 +1,3 @@
+﻿<#@ include file="entities.ttinclude" once="true" #>
+<#@ include file="core.ttinclude" once="true" #>
+<#@ include file="multipleOutputHelper.ttinclude" once="true" #>

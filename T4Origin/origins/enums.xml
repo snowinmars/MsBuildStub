@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <enum
+        toAssemblies="All"
+        csName="Direction"
+        csValueType="int">
+        <properties>
+            <property csName="None" value="0" />
+            <property csName="Up" value="1" />
+            <property csName="Down" value="2" />
+            <property csName="Left" value="3" />
+            <property csName="Right" value="4" />
+        </properties>
+    </enum>
+    <enum
+        toAssemblies="Entities"
+        csName="Visibility"
+        csValueType="int">
+        <properties>
+            <property csName="Visible" value="1" />
+            <property csName="Hidden" value="2" />
+        </properties>
+    </enum>
+    <enum
+        toAssemblies="Services"
+        csName="Language"
+        csValueType="int">
+        <properties>
+            <property csName="Russian" value="1" />
+            <property csName="Esperanto" value="2" />
+            <property csName="English" value="3" />
+        </properties>
+    </enum>
+</root>
