@@ -3,6 +3,7 @@
   <Import Project="$(MSBuildProjectDirectory)\..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets" /> <!-- set correct path -->
 
   <Import Project="AssemblyCommonInfo.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\..\[Configuration]\Assembly\DotNet.targets" />
 
   <Target Name="AssemblyInfoOverride" BeforeTargets="Build">
     <Version VersionFile="$(MSBuildProjectDirectory)\..\[Configuration]\Assembly\Version.data" BuildType="Automatic" RevisionType="Increment">
@@ -12,8 +13,8 @@
       <Output TaskParameter="Revision" PropertyName="Revision" />
     </Version>
 
-    <Message Text="Overriding AssemblyInfo for $(MSBuildProjectName): $(Major).$(Minor).$(Build).$(Revision)" Importance="High"></Message>
-    
+    <Message Text="Overriding AssemblyInfo for $(MSBuildProjectName). Ver.: [$(Major).$(Minor).$(Build).$(Revision)] .NET: [$(TargetFrameworkVersion)] C#: [$(LangVersion)]" Importance="High"></Message>
+
     <AssemblyInfo
       CodeLanguage="CS"
       OutputFile="Properties\AssemblyInfo.cs"

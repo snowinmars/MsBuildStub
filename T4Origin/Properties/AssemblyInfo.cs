@@ -15,7 +15,7 @@
 [assembly: System.Reflection.AssemblyCopyright("GNU/GPL")]
 [assembly: System.Reflection.AssemblyTrademark("snowinmarsTrademark")]
 [assembly: System.Runtime.InteropServices.ComVisible(false)]
-[assembly: System.Reflection.AssemblyVersion("1.0.7025.6")]
-[assembly: System.Reflection.AssemblyFileVersion("1.0.7025.6")]
+[assembly: System.Reflection.AssemblyVersion("1.0.7025.24")]
+[assembly: System.Reflection.AssemblyFileVersion("1.0.7025.24")]
 
 
