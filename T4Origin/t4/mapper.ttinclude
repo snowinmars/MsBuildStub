@@ -1,0 +1,60 @@
+﻿<#@ import namespace="System" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+
+<#@ include file="entities.ttinclude" once="true" #>
+
+<#+
+public static T GetAttributeValue<T>(XmlNode node, string attributeName)
+{
+    var value = node.Attributes.GetNamedItem(attributeName).Value;
+    return (T)Convert.ChangeType(value, typeof(T));
+}
+
+public static EnumProperty ToEnumProperty(XmlNode node)
+{
+    var propertyName = GetAttributeValue<string>(node, "csName");
+    var propertyValue = GetAttributeValue<int>(node, "value");
+
+    return new EnumProperty(propertyName, propertyValue);
+}
+
+public static EnumDeclaration ToEnumDeclaration(XmlNode enumNode)
+{
+    var enumName = GetAttributeValue<string>(enumNode, "csName");
+    var enumValue = GetAttributeValue<string>(enumNode, "csValueType");
+    var enumRawAssemblies = GetAttributeValue<string>(enumNode, "toAssemblies");
+    var enumAssemblies = enumRawAssemblies
+                            .Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries)
+                            .Select(x => x.Trim())
+                            .ToArray();
+
+    var enumDeclaration = new EnumDeclaration(enumName, enumValue, enumAssemblies);
+
+    // first and only child is always enum.properties
+    foreach (XmlNode property in enumNode.FirstChild.ChildNodes)
+    {
+        var enumProperty = ToEnumProperty(property);
+        enumDeclaration.Properties.Add(enumProperty);
+    }
+
+    return enumDeclaration;
+}
+
+public static AssemblyDeclaration ToAssemblyDeclaration(XmlNode node)
+{
+    var propertyId = GetAttributeValue<string>(node, "id");
+
+    if (propertyId == "All")
+    {
+        return new AssemblyDeclaration(propertyId, "", "");
+    }
+
+    var propertyPath = GetAttributeValue<string>(node, "path");
+    var propertyProjectName = GetAttributeValue<string>(node, "projectName");
+    return new AssemblyDeclaration(propertyId, propertyPath, propertyProjectName);
+}
+
+#>

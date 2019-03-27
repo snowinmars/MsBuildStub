@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+    <assembly
+        id="All" />
+
+    <assembly
+        id="Entities"
+        path="Entities"
+        projectName="Entities.csproj"
+    />
+    
+    <assembly
+       id="Services"
+       path="Services"
+       projectName="Services.csproj"
+    />
+</root>

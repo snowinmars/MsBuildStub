@@ -1,0 +1,112 @@
+﻿<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+
+<#@ include file="entities.ttinclude" once="true" #>
+<#@ include file="mapper.ttinclude" once="true" #>
+
+<#+
+
+public XmlDocument LoadSourceDoc(string path)
+{
+    var doc = new XmlDocument();
+    var resolvedPath = this.Host.ResolvePath(path);
+    doc.Load(resolvedPath);
+
+    return doc;
+}
+
+public AssemblyDeclaration[] GetAssemblies(XmlDocument doc)
+{
+    var result = new List<AssemblyDeclaration>();
+    var enums = doc.SelectNodes("/root")[0];
+
+    foreach (XmlNode _enum in enums)
+    {
+        var assemblyDeclaration = ToAssemblyDeclaration(_enum);
+        result.Add(assemblyDeclaration);
+    }
+
+    return result.ToArray();
+}
+
+public EnumDeclaration[] GetEnumDeclarations(XmlDocument doc)
+{
+    var result = new List<EnumDeclaration>();
+    var enums = doc.SelectNodes("/root")[0];
+
+    foreach (XmlNode _enum in enums)
+    {
+        var enumDeclaration = ToEnumDeclaration(_enum);
+        result.Add(enumDeclaration);
+    }
+
+    return result.ToArray();
+}
+
+public void ValidateAssemblies(EnumDeclaration[] enumDeclarations, AssemblyDeclaration[] allowedAssemblies)
+{
+    foreach (var enumDeclaration in enumDeclarations)
+    {
+        var intersect = enumDeclaration.Assemblies.Intersect(allowedAssemblies.Select(x => x.Id));
+        if (!intersect.Any())
+        {
+            // TODO [sim]: show enum and assembly names
+            throw new Exception("One of enums has assembly that wasn't declared in assembly XML");
+        }
+    }
+}
+
+public IEnumerable<IGrouping<string, IList<EnumDeclaration>>> GroupByAssembly(EnumDeclaration[] enumDeclarations, AssemblyDeclaration[] allowedAssemblies)
+{
+    ValidateAssemblies(enumDeclarations, allowedAssemblies);
+
+    // TODO [sim]: add multiple virtual assemblies support
+    var virtualAssembly = allowedAssemblies.First(x => x.IsVirtual);
+
+    var addLater = new List<EnumDeclaration>();
+    var result = new Dictionary<string, IList<EnumDeclaration>>();
+
+    foreach (var enumDeclaration in enumDeclarations)
+    {
+        foreach (var assembly in enumDeclaration.Assemblies)
+        {
+            // there's a virtual assembly "add to all assemblies"
+            if (assembly == virtualAssembly.Id)
+            {
+                addLater.Add(enumDeclaration);
+                continue;
+            }
+
+            if (!result.ContainsKey(assembly))
+            {
+                result.Add(assembly, new List<EnumDeclaration>());
+            }
+
+            result[assembly].Add(enumDeclaration);
+        }
+    }
+
+    foreach (var enumDeclaration in addLater)
+    {
+        foreach (var key in result.Keys)
+        {
+            result[key].Add(enumDeclaration);
+        }
+    }
+
+    return result.GroupBy(x => x.Key, x => x.Value);
+}
+
+public string GetRootPath()
+{
+    var currentPath = Path.GetDirectoryName(this.Host.TemplateFile);
+    var rootPath = Path.Combine(currentPath, "..");
+    return rootPath;
+}
+
+#>
+
+
