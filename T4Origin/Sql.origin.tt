@@ -62,8 +62,7 @@ foreach(var declarations in collection.Where(x => x.Key != "All")) {
     WHEN MATCHED THEN UPDATE SET [target].[Value] = [source].[Value]
     WHEN NOT MATCHED BY TARGET THEN INSERT([Id], [Value]) VALUES ([source].[Id], [source].[Value])
     WHEN NOT MATCHED BY SOURCE THEN DELETE
-    ;
-    ;
+    ;;
 
 <# } #>
 <# } #>

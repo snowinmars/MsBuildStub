@@ -62,10 +62,11 @@
   <Target Name="ScaffoldOnBuild" AfterTargets="BeforeBuild">
     <ItemGroup>
       <_TextTransform Include="$(SolutionDir)**\*.origin.tt" />
-      <Generated Include="$(SolutionDir)**\*.generated.cs" />
+      <CsGenerated Include="$(SolutionDir)**\*.generated.cs" />
+      <SqlGenerated Include="$(SolutionDir)**\*.generated.sql" />
     </ItemGroup>
-    <Message Text="Scaffolding... %0A sources: @(_TextTransform) %0A targets: @(Generated)" Importance="High" />
-    <Exec Command="$(PowerShellExe) -NonInteractive -executionpolicy Unrestricted -command &quot;&amp; { &amp;'$(SolutionDir)tools\scaffold.ps1' '@(_TextTransform)' '@(Generated)' } &quot;" />
+    <Message Text="Scaffolding... %0A sources: @(_TextTransform) %0A  cs targets: @(CsGenerated) %0A sql targets: @(SqlGenerated)" Importance="High" />
+    <Exec Command="$(PowerShellExe) -NonInteractive -executionpolicy Unrestricted -command &quot;&amp; { &amp;'$(SolutionDir)tools\scaffold.ps1' '@(_TextTransform)' '@(CsGenerated)' '@(SqlGenerated)' } &quot;" />
     <Message Text="Scaffolded" Importance="High" />
   </Target>
   <ItemGroup>
