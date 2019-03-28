@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildProjectDirectory)\..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets" /> <!-- set correct path -->
+  <Import Project="$(SolutionDir)packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets" /> <!-- set correct path -->
 
   <Import Project="AssemblyCommonInfo.targets" />
-  <Import Project="$(MSBuildProjectDirectory)\..\[Configuration]\Assembly\DotNet.targets" />
-  <Import Project="$(MSBuildProjectDirectory)\..\[Configuration]\Assembly\StyleCop.targets" />
+  <Import Project="$(SolutionDir)[Configuration]\Assembly\DotNet.targets" />
+  <Import Project="$(SolutionDir)[Configuration]\Assembly\StyleCop.targets" />
 
   <Target Name="AssemblyInfoOverride" BeforeTargets="Build">
-    <Version VersionFile="$(MSBuildProjectDirectory)\..\[Configuration]\Assembly\Version.data" BuildType="Automatic" RevisionType="Increment">
+    <Version VersionFile="$(SolutionDir)[Configuration]\Assembly\Version.data" BuildType="Automatic" RevisionType="Increment">
       <Output TaskParameter="Major" PropertyName="Major" />
       <Output TaskParameter="Minor" PropertyName="Minor" />
       <Output TaskParameter="Build" PropertyName="Build" />
