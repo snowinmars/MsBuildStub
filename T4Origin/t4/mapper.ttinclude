@@ -13,28 +13,78 @@ public static T GetAttributeValue<T>(XmlNode node, string attributeName)
     return (T)Convert.ChangeType(value, typeof(T));
 }
 
+public static string GuessType(string value)
+{
+    if (bool.TryParse(value, out var _))
+    {
+        return "bool";
+    }
+
+    if (int.TryParse(value, out var _))
+    {
+        return "int";
+    }
+    
+    if (long.TryParse(value, out var _))
+    {
+        return "long";
+    }
+
+    if (double.TryParse(value, out var _))
+    {
+        return "double";
+    }
+
+    if (decimal.TryParse(value, out var _))
+    {
+        return "decimal";
+    }
+
+    return "string";
+}
+
 public static EnumProperty ToEnumProperty(XmlNode node)
 {
     var propertyName = GetAttributeValue<string>(node, "csName");
     var propertyValue = GetAttributeValue<int>(node, "value");
+    
+    var property = new EnumProperty(propertyName, propertyValue);
 
-    return new EnumProperty(propertyName, propertyValue);
+    foreach (var attribute in node.Attributes.Cast<XmlAttribute>())
+    {
+        if (attribute.Name == "csName" || attribute.Name == "value")
+        {
+            continue;
+        }
+
+        var additionalProperty = new AdditionalEnumProperty
+        (
+            attribute.Name,
+            GuessType(attribute.Value),
+            attribute.Value
+        );
+
+        property.AdditionalProperties.Add(additionalProperty);
+    }
+
+    return property;
 }
 
 public static EnumDeclaration ToEnumDeclaration(XmlNode enumNode)
 {
     var enumName = GetAttributeValue<string>(enumNode, "csName");
-    var enumValue = GetAttributeValue<string>(enumNode, "csValueType");
     var enumRawAssemblies = GetAttributeValue<string>(enumNode, "toAssemblies");
     var enumAssemblies = enumRawAssemblies
                             .Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries)
                             .Select(x => x.Trim())
                             .ToArray();
 
-    var enumDeclaration = new EnumDeclaration(enumName, enumValue, enumAssemblies);
+    var enumDeclaration = new EnumDeclaration(enumName, enumAssemblies);
 
-    // first and only child is always enum.properties
-    foreach (XmlNode property in enumNode.FirstChild.ChildNodes)
+    foreach (XmlNode property in enumNode
+                                    .ChildNodes.Cast<XmlNode>()
+                                    .First(x => x.Name == "properties")
+                                    .ChildNodes)
     {
         var enumProperty = ToEnumProperty(property);
         enumDeclaration.Properties.Add(enumProperty);

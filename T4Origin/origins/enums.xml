@@ -2,33 +2,30 @@
 <root>
     <enum
         toAssemblies="All"
-        csName="Direction"
-        csValueType="int">
+        csName="Direction">
         <properties>
-            <property csName="None" value="0" />
-            <property csName="Up" value="1" />
-            <property csName="Down" value="2" />
-            <property csName="Left" value="3" />
-            <property csName="Right" value="4" />
+            <property csName="None" value="0" description="Not an operation" />
+            <property csName="Up" value="1" description="Nord" />
+            <property csName="Down" value="2" description="South" />
+            <property csName="Left" value="3" description="West" />
+            <property csName="Right" value="4" description="East" />
         </properties>
     </enum>
     <enum
         toAssemblies="Entities"
-        csName="Visibility"
-        csValueType="int">
+        csName="Visibility">
         <properties>
-            <property csName="Visible" value="1" />
-            <property csName="Hidden" value="2" />
+            <property csName="Visible" value="1" width="10" height="10.5" />
+            <property csName="Hidden" value="2" width="10" height="10.5" />
         </properties>
     </enum>
     <enum
         toAssemblies="Services"
-        csName="Language"
-        csValueType="int">
+        csName="Language">
         <properties>
-            <property csName="Russian" value="1" />
-            <property csName="Esperanto" value="2" />
-            <property csName="English" value="3" />
+            <property csName="Russian" value="1" example="Привет" />
+            <property csName="Esperanto" value="2" example="Saluto" />
+            <property csName="English" value="3" example="Hello" />
         </properties>
     </enum>
 </root>

@@ -75,6 +75,7 @@
     <Content Include="origins\enums.xml" />
     <Content Include="origins\settings.xml" />
     <Content Include="Sql.origin.tt" />
+    <Content Include="Wrapper.origin.tt" />
     <None Include="packages.config" />
     <None Include="t4\multipleOutputHelper.ttinclude" />
     <None Include="t4\mapper.ttinclude" />

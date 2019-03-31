@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntitiesEnums.generated.cs" />
+    <Compile Include="EntitiesWrapper.generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StyleCopTestingClass.cs" />
   </ItemGroup>

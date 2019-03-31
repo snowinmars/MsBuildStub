@@ -23,17 +23,14 @@ public class AssemblyDeclaration
 
 public class EnumDeclaration
 {
-    public EnumDeclaration(string name, string enumValueType, string[] assemblies)
+    public EnumDeclaration(string name, string[] assemblies)
     {
         CsName = name;
-        CsValueType = enumValueType;
         Assemblies = assemblies;
         Properties = new List<EnumProperty>();
     }
 
     public string CsName { get; }
-
-    public string CsValueType { get; }
 
     public List<EnumProperty> Properties { get; }
 
@@ -46,11 +43,30 @@ public class EnumProperty
     {
         CsName = name;
         Value = value;
+        AdditionalProperties = new List<AdditionalEnumProperty>();
     }
 
     public string CsName { get; }
 
     public int Value { get; }
+
+    public IList<AdditionalEnumProperty> AdditionalProperties { get; }
+}
+
+public class AdditionalEnumProperty
+{
+    public AdditionalEnumProperty(string name, string typeName, string value)
+    {
+        Name = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name);
+        TypeName = typeName;
+        Value = value;
+    }
+
+    public string Name { get; }
+
+    public string TypeName { get; }
+
+    public string Value { get; }
 }
 
 #>

@@ -56,7 +56,7 @@ Temporary Items
 **/.vs/
 
 #generated stuff
-*.generated.cs
 *.orig
 *.origin.cs
+*.origin.sql
 [Configuration]/Assembly/Version.data
