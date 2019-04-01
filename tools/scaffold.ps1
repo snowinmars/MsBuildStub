@@ -3,7 +3,7 @@ param([string]$rawTemplates, [string]$rawCsGenerated, [string]$rawSqlGenerated)
     $root = $pwd.Path + '\..\'
     $astyleExePath = $root + "tools\astyle.exe"
     # TODO [sim]:  move tt executable to tools folder
-    $textTransformExePath = "D:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\TextTransform.exe"
+    $textTransformExePath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\TextTransform.exe"
 
     $templates = $rawTemplates.Split(';')
     $csGenerates = $rawCsGenerated.Split(';')
