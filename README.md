@@ -33,7 +33,7 @@ MSBuild struggle if .generated files are missed on disk.
 If it happens, run build twice: first one will create files and next one will handle them property.
 
 ### Documentation
-<img src="https://i110.fastpic.ru/big/2019/0401/92/_6457694809df1fdd55aea22913b2e292.png?noht=1" border="0" width="100%">
+<img src="https://pp.userapi.com/c850736/v850736663/edfc7/x3ARdQWAPkc.jpg" border="0" width="100%">
 
 The enums are defined in the XML file in the `/t4origin/origins/enums.xml`
 * `enum.toAssemblies` attribute determinates the project destination and should match one of the assemblies in the `assemblies.xml` file. An Exception will be thrown otherwise
