@@ -13,6 +13,12 @@ btw: you can read about this repository in the <a href="https://habr.com/ru/post
 
 ## Getting Started
 
+Idk how to get T4 tool as standalone app so you should install it manually.
+Open Visual Studio Installer.
+Switch to the Individual components tab.
+Mark "Text Transform" tool to be intalled.
+Try to find it on your PC, f.e. try path `C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\TextTransform.exe`. Write the path to exe file to `/MsBuildStub/tools/scaffold.ps1` into `$textTransformExePath` variable.
+
 Build the solution.
 
 You'll see new files that was generated during build:
@@ -27,17 +33,19 @@ MSBuild struggle if .generated files are missed on disk.
 If it happens, run build twice: first one will create files and next one will handle them property.
 
 ### Documentation
+<img src="https://i110.fastpic.ru/big/2019/0401/92/_6457694809df1fdd55aea22913b2e292.png?noht=1" border="0" width="100%">
 
 The enums are defined in the XML file in the `/t4origin/origins/enums.xml`
-* `toAssemblies` attribute determinates the project destination and should match one of the assemblies in the `assemblies.xml` file. An Exception will be thrown otherwise
-* `csValueType` attribute is now ignored
+* `enum.toAssemblies` attribute determinates the project destination and should match one of the assemblies in the `assemblies.xml` file. An Exception will be thrown otherwise
+* `enum.csName` is enum name in C#
+* `enum.property.csName` is enum's property name in C#
+* `enum.property.value` is enums property's value in C#
+* `enum.property.%anything%` will be transformed to wrapper field. The code will try to guess the type. At least it will be string.
 
 The assemblies are defined in the XML file in the `/t4origin/origins/assemblies.xml`
 * `id` attribute should match the `toAssemblies` attribute in the `enums.xml` file
 * `path` attribute determinates the destination for t4 output. Generated files will be placed here
 * `projectName` attribute is not ignored
-
-TODO add smth about stylecop
 
 ### Prerequisites
 
