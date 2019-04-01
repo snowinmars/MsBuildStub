@@ -60,3 +60,4 @@ Temporary Items
 *.origin.cs
 *.origin.sql
 [Configuration]/Assembly/Version.data
+\[Configuration\]/Assembly/Version.data
