@@ -34,6 +34,7 @@ If it happens, run build twice: first one will create files and next one will ha
 
 ### Documentation
 <img src="https://pp.userapi.com/c850736/v850736663/edfc7/x3ARdQWAPkc.jpg" border="0" width="100%">
+<img src="https://pp.userapi.com/c847123/v847123990/1d7c4a/pPB-BHIuZyo.jpg" border="0" width="100%">
 
 The enums are defined in the XML file in the `/t4origin/origins/enums.xml`
 * `enum.toAssemblies` attribute determinates the project destination and should match one of the assemblies in the `assemblies.xml` file. An Exception will be thrown otherwise
